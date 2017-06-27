@@ -1,4 +1,50 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F73" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="History" representedClassName="History" syncable="YES">
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="seat" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="theater" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="images" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Image" inverseName="history" inverseEntity="Image" syncable="YES"/>
+        <relationship name="movie" maxCount="1" deletionRule="Nullify" destinationEntity="Movie" inverseName="histories" inverseEntity="Movie" syncable="YES"/>
+        <relationship name="screen" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Screen" inverseName="histories" inverseEntity="Screen" syncable="YES"/>
+        <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Tag" inverseName="historys" inverseEntity="Tag" syncable="YES"/>
+    </entity>
+    <entity name="Image" representedClassName="Image" syncable="YES" codeGenerationType="class">
+        <attribute name="image" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <relationship name="history" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="History" inverseName="images" inverseEntity="History" syncable="YES"/>
+        <relationship name="movie" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Movie" inverseName="images" inverseEntity="Movie" syncable="YES"/>
+    </entity>
+    <entity name="Movie" representedClassName="Movie" syncable="YES">
+        <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" attributeType="String" syncable="YES"/>
+        <attribute name="year" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="histories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="History" inverseName="movie" inverseEntity="History" syncable="YES"/>
+        <relationship name="images" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Image" inverseName="movie" inverseEntity="Image" syncable="YES"/>
+        <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Tag" inverseName="movies" inverseEntity="Tag" syncable="YES"/>
+    </entity>
+    <entity name="Screen" representedClassName="Screen" syncable="YES">
+        <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="number" attributeType="String" syncable="YES"/>
+        <relationship name="histories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="History" inverseName="screen" inverseEntity="History" syncable="YES"/>
+        <relationship name="theater" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Theater" inverseName="screens" inverseEntity="Theater" syncable="YES"/>
+    </entity>
+    <entity name="Tag" representedClassName="Tag" syncable="YES">
+        <attribute name="tag" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="historys" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="History" inverseName="tags" inverseEntity="History" syncable="YES"/>
+        <relationship name="movies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Movie" inverseName="tags" inverseEntity="Movie" syncable="YES"/>
+    </entity>
+    <entity name="Theater" representedClassName="Theater" syncable="YES">
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="screens" optional="YES" toMany="YES" minCount="1" deletionRule="Nullify" destinationEntity="Screen" inverseName="theater" inverseEntity="Screen" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="History" positionX="232" positionY="27" width="128" height="165"/>
+        <element name="Image" positionX="45" positionY="72" width="128" height="90"/>
+        <element name="Movie" positionX="-135" positionY="5" width="128" height="135"/>
+        <element name="Screen" positionX="72" positionY="36" width="128" height="105"/>
+        <element name="Tag" positionX="81" positionY="54" width="128" height="90"/>
+        <element name="Theater" positionX="72" positionY="-9" width="128" height="90"/>
+    </elements>
 </model>

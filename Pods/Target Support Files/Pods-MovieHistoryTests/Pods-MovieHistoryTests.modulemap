@@ -1,0 +1,6 @@
+framework module Pods_MovieHistoryTests {
+  umbrella header "Pods-MovieHistoryTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
